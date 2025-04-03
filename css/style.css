@@ -1,0 +1,847 @@
+/* ==========================================================================
+   Base Styles & Resets
+   ========================================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    background-color: #fff; /* Light grey background */
+    color: #333;
+}
+
+a {
+    text-decoration: none;
+    color: #d95c00; /* Orange link color */
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+ul {
+    list-style: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* ==========================================================================
+   Site Wrapper
+   ========================================================================== */
+
+#site-wrapper {
+    width: 990px;
+    margin: 0 auto;
+    background-color: #fff; /* Give wrapper a background to contain floated/flex elements */
+}
+
+/* ==========================================================================
+   Header - Top Bar (UOL Bar)
+   ========================================================================== */
+
+.top-bar {
+    background-color: #363636;
+    color: #ccc;
+    padding: 2px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    border-top: 1px solid white; /* Added white top border */
+    border-bottom: 1px solid white; /* Added white bottom border */
+}
+
+.top-bar .left-links,
+.top-bar .right-links { /* Note: .right-links isn't used in HTML, but kept for potential future use */
+    display: flex;
+    align-items: center;
+}
+
+.top-bar .left-links img { /* UOL Logo */
+    height: 15px;
+    margin-right: 10px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+ .top-bar .left-links span { /* Style for non-link spans (Phone, SAC) */
+     margin-right: 15px;
+     font: 11px / 29px Arial;
+     color: #ccc;
+     text-decoration: none;
+ }
+
+ .top-bar .left-links a { /* Style for links (Bate-papo, E-mail, etc.) */
+     margin-right: 15px;
+     font: bold 14px / 28px Arial !important;
+     color: #FFF !important; /* Use important to override potential conflicts */
+     text-decoration: none;
+ }
+
+ .top-bar .left-links a:hover {
+     color: #fff;
+     text-decoration: none; /* Keep no underline on hover */
+ }
+
+.top-bar .right-search input[type="text"] {
+    padding: 3px 5px;
+    border: 1px solid #666;
+    background-color: #fff;
+    font-size: 11px;
+    border-radius: 3px;
+    width: 150px;
+    vertical-align: middle;
+    /* Add padding and background for search icon */
+    padding-left: 20px; /* Space for icon */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16 16"><path fill="%23888" d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: 5px center; /* Position icon */
+    background-size: 12px 12px; /* Icon size */
+}
+
+.top-bar .right-search button {
+    padding: 3px 8px;
+    background-color: #FFF; /* White background */
+    border: 1px solid #777;
+    color: #333; /* Dark text color */
+    font-size: 11px;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.top-bar .right-search button:hover {
+    background-color: #777; /* Darker background on hover */
+}
+
+/* ==========================================================================
+   Header - Logo and Game Search Area
+   ========================================================================== */
+
+.logo-search-area {
+    /* Fallback background color */
+    background-color: #2e2e2e;
+     /* Layered background: Vertical gradient overlay + diagonal lines */
+     background-image:
+         /* Adjusted gradient: Darker top, lighter middle, slightly darker bottom */
+         linear-gradient(to bottom, rgba(0,0,0,0.45), rgba(0,0,0,0.1) 60%, rgba(0,0,0,0.3)),
+         /* Smaller diagonal lines */
+         repeating-linear-gradient(
+             45deg,
+             #505050,       /* Darker line color */
+             #505050 2px,   /* Line width: 2px */
+             #5a5a5a 2px,   /* Gap start (same color as fallback) */
+             #5a5a5a 3px    /* Gap end (total 3px cycle = 1px gap) */
+         );
+    padding: 0px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Keep items vertically centered */
+    border-bottom: 1px solid #6a6a6a;
+    position: relative; /* Needed for absolute positioning of counter */
+}
+
+.logo-search-area .logo-section {
+    display: flex;
+    align-items: flex-end; /* Align logo to bottom */
+}
+
+.logo-search-area .logo { /* Click Jogos Logo */
+     width: 300px;
+     height: 80px;
+     background: none; /* Transparent background */
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     margin-right: 15px;
+}
+
+/* Game Counter Styles */
+.logo-search-area .counter {
+    position: relative; /* Needed for tooltip positioning */
+    padding-top: 30px; /* Space for the tooltip */
+    width: auto; /* Let content determine width */
+    border: none;
+    background: none;
+    text-align: center; /* Center the button */
+}
+
+/* Tooltip bubble style */
+.logo-search-area .counter .tooltip-number {
+    position: absolute;
+    bottom: calc(100% - 35px); /* Position above the button area */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 8px 8px;
+    border-radius: 2px;
+    font-weight: normal;
+    font-size: 12px;
+    color: #777; /* Greyish color */
+    white-space: nowrap;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    z-index: 10;
+    min-width: 50px;
+    text-align: center;
+}
+
+/* Tooltip pointer */
+.logo-search-area .counter .tooltip-number::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -4px; /* Adjust for smaller size */
+    border-width: 4px;
+    border-style: solid;
+    border-color: #fff transparent transparent transparent; /* White top border */
+}
+
+/* Style for the "+1" button container */
+.logo-search-area .counter .plus-one-button {
+    background-color: #fff;
+    color: #4c8ef1; /* Blue text */
+    font-weight: 900; /* Bolder */
+    padding: 1px 6px 1px 6px; /* T R B L */
+    border-radius: 3px;
+    font-size: 10px;
+    font-style: italic; /* Italic text */
+    display: inline-block;
+    border: 1px solid #ccc;
+    position: relative; /* Needed for the color bar */
+    overflow: hidden; /* Hide overflow from pseudo-element */
+    padding-top: 4px; /* Space for the color bar */
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    min-width: 50px; /* Match tooltip min-width */
+    text-align: center;
+    margin-top: 10px; /* Space between tooltip and button */
+}
+
+/* Multi-color bar using pseudo-element */
+.logo-search-area .counter .plus-one-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px; /* Height of the color bar */
+    background: linear-gradient(to right,
+        #d13c31 0%, #d13c31 25%,   /* Red */
+        #4a8af4 25%, #4a8af4 50%,   /* Blue */
+        #67a74e 50%, #67a74e 75%,   /* Green */
+        #f6d752 75%, #f6d752 100%  /* Yellow */
+    );
+}
+
+/* Game Search Form Styles */
+.logo-search-area .game-search {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.logo-search-area .game-search label {
+    display: inline-block;
+    font-size: 11px;
+    color: #eee;
+    background-color: #605c5c; /* Label background */
+    padding: 8px 8px 5px 8px; /* T R B L */
+    margin-bottom: 0;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+/* Wrapper for input and button */
+.logo-search-area .search-input-wrapper {
+    display: flex;
+    border-top: none; /* Remove top border to connect with label bg */
+    background-color: #605c5c; /* Background for input/button area */
+    padding: 8px 8px 8px 8px; /* T R B L */
+    height: auto;
+    width: auto;
+    min-width: 470px; /* Minimum width */
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.logo-search-area .game-search input[type="text"] {
+    padding: 5px 8px;
+    border: none;
+    flex-grow: 1; /* Input takes available space */
+    font-size: 12px;
+    outline: none;
+    height: 23px; /* Explicit height */
+    line-height: 18px;
+}
+
+.logo-search-area .game-search button {
+    padding: 0 15px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    color: #555;
+    font-weight: normal;
+    font-size: 12px;
+    cursor: pointer;
+    text-transform: lowercase;
+    height: 23px; /* Match input height */
+    line-height: 18px; /* Center text vertically */
+    border-radius: 2px;
+}
+
+ .logo-search-area .game-search button:hover {
+    background-color: #f0f0f0; /* Lighter hover */
+ }
+
+/* ==========================================================================
+   Main Navigation Bar
+   ========================================================================== */
+
+.main-nav {
+    /* Fallback solid color */
+    background-color: #fb6b04;
+    /* Layered background: Subtle diagonal lines + Main orange gradient */
+    background-image:
+         /* Repeating diagonal orange lines (subtle) */
+         repeating-linear-gradient(
+             45deg,
+             rgba(0, 0, 0, 0.03),       /* Very subtle transparent dark lines */
+             rgba(0, 0, 0, 0.03) 2px,   /* Line width: 2px */
+             rgba(255, 255, 255, 0.02) 2px,   /* Very subtle transparent light gap start */
+             rgba(255, 255, 255, 0.02) 6px    /* Gap end (4px gap) */
+         ),
+     /* Main visible gradient (bottom layer) */
+     linear-gradient(to top, #fb6b04, #fca40c);
+    padding: 0 10px;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    box-shadow: 0 5px 5px -3px rgba(0,0,0,0.35); /* Drop shadow */
+    position: relative; /* Needed for z-index */
+    z-index: 1; /* Ensure nav is above content below */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 35px; /* Navigation height */
+    font-family: "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+}
+
+.main-nav ul {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.main-nav li {
+    margin-right: 5px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.main-nav li a {
+    color: #fff;
+    font-weight: bold;
+    padding: 0 9px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    font-size: 12px;
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+ .main-nav li:first-child a {
+    /* No special border/padding needed for first item with current structure */
+    padding-right: 0; /* Remove right padding if home icon is larger */
+ }
+
+ .main-nav li:last-child a {
+     /* No border needed for last item */
+ }
+
+.main-nav li a:hover {
+    background-color: rgba(0, 0, 0, 0.1); /* Subtle background on hover */
+    text-decoration: none;
+}
+
+/* Default icon style (triangle) */
+.main-nav li a .icon {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-right: 5px;
+    vertical-align: middle;
+    /* SVG background for triangle with white border */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10"><polygon points="3,2 7,5 3,8" fill="%23f58220" stroke="white" stroke-width="1.5"/></svg>'); /* Orange fill, white stroke */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+     -webkit-text-stroke: 0; /* Remove potential text stroke */
+     text-stroke: 0;
+}
+
+/* Home icon specific style */
+.main-nav li a .icon.home {
+     /* SVG background for home icon */
+     background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiPjxwYXRoIGQ9Ik0xMCAyMHYtNmg0djZoNXYtOGgzTDEyIDMgMiAxMmgzdjh6IE0xNiA2LjYgVjUgSDE5IFY5LjMgWiIvPjwvc3ZnPg==');
+     background-size: contain;
+     background-repeat: no-repeat;
+     background-position: center;
+     -webkit-text-stroke: 0;
+     text-stroke: 0;
+     color: transparent; /* Hide fallback text */
+     width: 22px; /* Specific size */
+     height: 22px; /* Specific size */
+     margin-right: 10px; /* Adjusted margin */
+}
+
+/* Favorites link style */
+.main-nav .favorites a {
+    color: #fff;
+    font-weight: bold;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    border-left: 1px solid rgba(255,255,255,0.2); /* Separator line */
+}
+
+ .main-nav .favorites a:hover {
+     background-color: rgba(0, 0, 0, 0.1);
+     text-decoration: none;
+ }
+
+.main-nav .favorites .icon-star { /* Star Icon */
+    display: inline-block;
+    color: white;
+    margin-right: 5px;
+    font-size: 16px;
+    line-height: 1;
+}
+
+/* ==========================================================================
+   Main Content Area (Sidebar + Content)
+   ========================================================================== */
+
+.main-content {
+    display: flex;
+    padding: 15px 10px;
+    background-color: #fff; /* White background for content area */
+}
+
+/* ==========================================================================
+   Sidebar (Categories)
+   ========================================================================== */
+
+.sidebar {
+    width: 120px; /* Sidebar width */
+    border-right: 1px solid #eee; /* Separator */
+    background-color: #f9f9f9; /* Light background */
+    padding-right: 10px; /* Add some padding to prevent text touching the border */
+}
+
+.sidebar ul li {
+    margin-bottom: 8px;
+    padding-bottom: 8px; /* Spacing below item */
+    border-bottom: 1px solid #eee; /* Separator line */
+}
+
+.sidebar ul li:last-child {
+    border-bottom: none; /* Remove border from last item */
+}
+
+.sidebar ul li a {
+    display: flex;
+    align-items: center;
+    color: #d95c00; /* Orange link color */
+    font-weight: bold;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.sidebar ul li a:hover {
+    text-decoration: underline;
+}
+
+.sidebar .icon { /* Category icons */
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Hide overflow if image is larger */
+    /* Assuming images are used via <img> tags, no background needed here */
+}
+
+/* ==========================================================================
+   Content Area (Featured, Newest, Top Games)
+   ========================================================================== */
+
+.content-area {
+    flex: 1; /* Takes remaining space */
+}
+
+/* ==========================================================================
+   Section Headers (Common Style)
+   ========================================================================== */
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+.section-header h2 {
+    font-size: 14px;
+    color: #666;
+    font-weight: normal;
+    display: flex;
+    align-items: center;
+}
+
+.section-header h2::before { /* Radio button style circle icon */
+     content: '';
+     display: inline-block;
+     width: 16px;
+     height: 16px;
+     border-radius: 50%;
+     margin-right: 8px;
+     position: relative;
+     /* SVG background for circle with tailed arrow */
+     background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7.5" fill="white" stroke="%23ccc"/><circle cx="8" cy="8" r="5" fill="%23ccc"/><polygon points="7,5 12,8 7,11 7,9 5,9 5,7 7,7" fill="white"/></svg>');
+     background-repeat: no-repeat;
+     background-position: center center;
+     background-size: contain;
+     border: none;
+}
+
+.section-header .more-link {
+    font-size: 11px;
+    color: #999; /* Default grey color */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Specific underline for "Mais Jogos Populares" link */
+.featured-games .section-header .more-link {
+     text-decoration: underline;
+}
+
+.section-header .more-link:hover {
+     color: #d95c00; /* Orange on hover */
+     text-decoration: underline;
+}
+
+.section-header .more-link .plus-icon { /* Plus icon style */
+     display: inline-block;
+     width: 12px;
+     height: 12px;
+     background-color: #ffae00; /* Orange background */
+     color: #fff; /* White plus sign */
+     text-align: center;
+     line-height: 11px; /* Vertical align */
+     font-weight: bold;
+     margin-right: 3px;
+     border-radius: 2px;
+     font-size: 10px;
+}
+
+/* ==========================================================================
+   Featured Games Section
+   ========================================================================== */
+
+.featured-games {
+    background-color: #f9f9f9; /* Light background */
+    padding: 15px;
+    margin-bottom: 15px;
+    margin-left: 10px; /* Indent from sidebar */
+}
+
+.featured-games .game-display {
+    display: flex;
+    margin-bottom: 15px; /* Space between rows/groups */
+}
+
+.featured-games .main-featured-game {
+    margin-right: 15px;
+    display: flex;
+    flex: 1; /* Take available space */
+}
+
+.featured-games .game-image.large { /* Placeholder style */
+    width: 180px;
+    height: 135px;
+    background-color: #e0e0e0;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+    display: flex; align-items: center; justify-content: center; color: #666; font-size: 12px;
+}
+
+.featured-games .game-info {
+     flex: 1; /* Info takes remaining space in its container */
+}
+
+ .featured-games .game-info h3 {
+     font-size: 14px;
+     margin-bottom: 5px;
+ }
+
+ /* Game title link style (Red with black underline) */
+ .featured-games .game-info h3 a {
+     color: red;
+     font-weight: bold;
+     text-decoration: underline;
+     text-decoration-color: black;
+ }
+
+ .featured-games .game-info h3 a:hover {
+     color: #d95c00; /* Orange on hover */
+     text-decoration-color: #d95c00; /* Underline matches hover color */
+ }
+
+ .featured-games .game-info p {
+     font-size: 12px;
+     color: #666;
+     line-height: 1.4;
+     margin-bottom: 8px;
+ }
+
+  .featured-games .game-info .category-link a {
+     font-size: 11px;
+     color: #666; /* Category link color */
+  }
+
+/* Secondary featured games column */
+.featured-games .secondary-featured-games {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+     width: 300px; /* Fixed width for the right column */
+}
+
+.featured-games .small-featured-game {
+    display: flex;
+     margin-bottom: 10px; /* Spacing between small games */
+}
+
+ .featured-games .small-featured-game:last-child {
+     margin-bottom: 0; /* No margin on the last small game */
+ }
+
+.featured-games .game-image.small { /* Placeholder style */
+    width: 80px;
+    height: 60px;
+    background-color: #e0e0e0;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+     display: flex; align-items: center; justify-content: center; color: #666; font-size: 10px;
+}
+
+.featured-games .small-featured-game .game-info h3 {
+     font-size: 12px; /* Smaller title */
+     margin-bottom: 3px;
+}
+
+ /* Apply red/black underline to small featured game titles too */
+ .featured-games .small-featured-game .game-info h3 a {
+     color: red;
+     text-decoration: underline;
+     text-decoration-color: black;
+ }
+
+ .featured-games .small-featured-game .game-info h3 a:hover {
+     color: #d95c00;
+     text-decoration-color: #d95c00;
+ }
+
+.featured-games .small-featured-game .game-info p {
+     font-size: 11px; /* Smaller description */
+     color: #666;
+     line-height: 1.3;
+}
+
+/* Tooltip style - Example for truncated titles */
+.tooltip-trigger {
+    position: relative; /* Needed for absolute positioning of tooltip */
+    display: inline-block; /* Adjust as needed */
+}
+
+ /* Basic tooltip style - hidden by default */
+ .tooltip-text {
+     visibility: hidden; /* Hidden initially */
+     width: 140px; /* Tooltip width */
+     background-color: #fff;
+     color: #333;
+     text-align: center;
+     border: 1px solid #ccc;
+     padding: 5px;
+     border-radius: 3px;
+     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+     /* Position the tooltip */
+     position: absolute;
+     z-index: 1;
+     bottom: 110%; /* Position above the trigger */
+     left: 50%;
+     margin-left: -70px; /* Center the tooltip */
+     opacity: 0; /* Hidden initially */
+     transition: opacity 0.3s; /* Fade effect */
+     font-size: 11px;
+     font-weight: bold;
+ }
+
+ /* Show the tooltip text on hover */
+ .tooltip-trigger:hover .tooltip-text {
+     visibility: visible;
+     opacity: 1;
+ }
+
+/* Featured Games Pagination */
+.featured-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px; /* Space above pagination */
+}
+
+.featured-pagination button {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 5px 15px;
+    margin: 0 10px; /* Space around buttons */
+    font-size: 11px;
+    color: #666;
+    cursor: pointer;
+}
+
+ .featured-pagination button:hover {
+     background-color: #e0e0e0; /* Darker on hover */
+ }
+
+ .featured-pagination button:disabled { /* Style for disabled buttons */
+    cursor: default;
+    opacity: 0.5;
+    background-color: #f0f0f0;
+ }
+
+.featured-pagination .dots {
+    display: flex;
+}
+
+.featured-pagination .dot {
+    width: 12px;
+    height: 12px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 50%; /* Circular dots */
+    margin: 0 3px; /* Space between dots */
+    cursor: pointer;
+}
+
+.featured-pagination .dot.active {
+    background-color: #ff9900; /* Active dot color (orange) */
+    border-color: #e68a00; /* Darker orange border */
+}
+
+/* ==========================================================================
+   Game Grids (Common Styles)
+   ========================================================================== */
+
+.game-grid {
+    display: grid;
+    gap: 15px; /* Default gap */
+}
+
+.game-grid .game-item {
+    display: flex; /* Default layout for items with image + info */
+}
+
+.game-grid .game-info h3 {
+    font-size: 12px;
+    margin-bottom: 3px;
+}
+
+ /* Apply red/black underline to grid game titles */
+ .game-grid .game-info h3 a {
+     color: red;
+     text-decoration: underline;
+     text-decoration-color: black;
+ }
+
+ .game-grid .game-info h3 a:hover {
+     color: #d95c00;
+     text-decoration-color: #d95c00;
+ }
+
+.game-grid .game-info p {
+    font-size: 11px;
+    color: #666;
+    line-height: 1.3;
+}
+
+/* ==========================================================================
+   Newest Games Section
+   ========================================================================== */
+
+.newest-games {
+    background-color: #f9f9f9; /* Light background */
+    padding: 15px;
+    margin-bottom: 25px; /* Space below section */
+    margin-left: 10px; /* Indent from sidebar */
+}
+
+/* Specific grid layout for 'Novos' */
+.newest-games .game-grid {
+     grid-template-columns: repeat(4, 1fr); /* 4 columns */
+     gap: 10px 20px; /* Row gap, Column gap */
+}
+
+.newest-games .game-grid .game-image.medium { /* Placeholder style */
+    width: 80px;
+    height: 60px;
+    background-color: #e0e0e0;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+     display: flex; align-items: center; justify-content: center; color: #666; font-size: 10px;
+}
+
+/* ==========================================================================
+   Top Games Section
+   ========================================================================== */
+
+.top-games {
+    margin-left: 10px; /* Indent from sidebar */
+    /* No specific background needed unless desired */
+}
+
+/* Specific grid layout for 'Top Jogos' (icons only) */
+ .top-games .game-grid {
+     grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)); /* Responsive grid for small icons */
+     gap: 10px;
+ }
+
+.top-games .game-item {
+    /* Override default flex direction for icon-only items */
+    flex-direction: column;
+    align-items: center; /* Center the icon */
+}
+
+.top-games .game-image.icon-only { /* Placeholder style */
+    width: 48px;
+    height: 48px;
+    background-color: #e0e0e0;
+    border: 1px solid #ccc;
+     display: flex; align-items: center; justify-content: center; color: #666; font-size: 10px;
+     margin: 0; /* Remove margin if any was inherited */
+}
