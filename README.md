@@ -1,1 +1,1 @@
-# Clone do Click Jogos
+# Clone da pagina principal do Click Jogos
