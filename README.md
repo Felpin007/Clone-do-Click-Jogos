@@ -1,2 +1,3 @@
-# Clone da pagina principal do Click Jogos
-!(./preview.png)
+# Clone da Página Principal do Click Jogos
+
+![Prévia](./preview.png)
